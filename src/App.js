@@ -1,10 +1,12 @@
 
 import './App.css';
 import React, { useState } from 'react';
-import Footer from './footer'
+
+import'../node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 
 const api = {
-  key:"cfd0576c08ea92a95b0287712d61e2b3",
+  key:"bf88ebbec8ca60e3a8591d385a42fc04",
   base: "https://api.openweathermap.org/data/2.5/"
 }
 
@@ -24,6 +26,16 @@ function App() {
         });
     }
   }
+  const search2 = evt => {
+      fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then(res => res.json())
+        .then(result => {
+          setWeather(result);
+          setQuery('');
+          console.log(result);
+        });
+  }
+  
 
   const dateBuilder = (d) => {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -34,7 +46,7 @@ function App() {
     let month = months[d.getMonth()];
     let year = d.getFullYear();
 
-    return `${day} ${date} ${month} ${year}`
+    return `${day}, ${date}th ${month} ${year}`
   }
 
   const backset = (d) => {
@@ -43,27 +55,29 @@ function App() {
     else if(d==='Rain')typec = 'app rain';
     else if(d==='Haze')typec = 'app haze';
     else if(d==='Snow')typec = 'app snow';
-    else if(d==='Clouds' || d==='Clear')typec = 'app cloud';
-  
+    else if(d==='Clouds')typec = 'app cloud';
+    else if(d==='Clear')typec = 'app clear';
     return `${typec}`
   }
 
 
   return (
-  //<div className={backset(weather.weather[0].main)}>
   <div className={(typeof weather.main != "undefined") ? backset(weather.weather[0].main): 'app'}>
       <main>
-        <div className="search-box">
-          <input 
-            type="text"
-            className="search-bar"
-            placeholder="Search..."
-            onChange={e => setQuery(e.target.value)}
-            value={query}
-            onKeyPress={search}
-          />
+        <div className='row justify-content-center'>
+          <div className="search-box  col-lg-8 col-md-8 col-auto">
+            <input 
+              type="text"
+              className="search-bar"
+              placeholder="Enter city/area name..."
+              onChange={e => setQuery(e.target.value)}
+              value={query}
+              onKeyPress={search}
+            />
+          </div>
+          <div className='col-auto pt-3'><button className='btn btn-success'onClick={search2}>Find</button></div>
         </div>
-        
+       
         {(typeof weather.main != "undefined") ? (
         <div>
           <div className="location-box">
