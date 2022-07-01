@@ -64,19 +64,20 @@ function App() {
   return (
   <div className={(typeof weather.main != "undefined") ? backset(weather.weather[0].main): 'app'}>
       <main>
-        <div className='row justify-content-center'>
-          <div className="search-box  col-lg-8 col-md-8 col-auto">
+      
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'black',fontFamily:'monospace'}}><h1> Weather Pro </h1></div>
+        <div className="row  r2 justify-content-center">
+        
             <input 
               type="text"
-              className="search-bar"
+              className="sb col-lg-8 col-md-6 col-auto "
               placeholder="Enter city/area name..."
               onChange={e => setQuery(e.target.value)}
               value={query}
               onKeyPress={search}
             />
-          </div>
-          <div className='col-auto pt-3'><button className='btn btn-success'onClick={search2}>Find</button></div>
-        </div>
+            <button className='sb2 col-auto' onClick={search2}>Find</button>
+       </div>
        
         {(typeof weather.main != "undefined") ? (
         <div>
