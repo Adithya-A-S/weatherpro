@@ -62,41 +62,41 @@ function App() {
 
 
   return (
-  <div className={(typeof weather.main != "undefined") ? backset(weather.weather[0].main): 'app'}>
-      <main>
-      
-      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'black',fontFamily:'monospace'}}><h1> Weather Pro </h1></div>
-        <div className="row  r2 justify-content-center">
-        
-            <input 
-              type="text"
-              className="sb col-lg-8 col-md-6 col-auto "
-              placeholder="Enter city/area name..."
-              onChange={e => setQuery(e.target.value)}
-              value={query}
-              onKeyPress={search}
-            />
-            <button className='sb2 col-auto' onClick={search2}>Find</button>
-       </div>
-       
-        {(typeof weather.main != "undefined") ? (
-        <div>
-          <div className="location-box">
-            <div className="location">{weather.name}, {weather.sys.country}</div>
-            <div className="date">{dateBuilder(new Date())}</div>
-          </div>
-          <div className="weather-box">
-            <div className="temp">
-              {Math.round(weather.main.temp)}°c
-            </div>
-            <div className="weather">{weather.weather[0].main}</div>
-          </div>
-        </div>
-        ) : ('')}  
-      </main>
-    </div>
+    <div className={(typeof weather.main != "undefined") ? backset(weather.weather[0].main): 'app'}>
+    <main>
     
-  );
+    <div style={{display: 'flex',  justifyContent:'center', alignItems:'center',color:'white',fontFamily:'inherit'}}><h1> Weather Pro </h1></div>
+      <div className="row  r2 justify-content-center">
+      
+          <input 
+            type="text"
+            className="sb col-lg-8 col-md-6 col-auto "
+            placeholder="Enter city/area name..."
+            onChange={e => setQuery(e.target.value)}
+            value={query}
+            onKeyPress={search}
+          />
+          <button className='sb2 col-auto' onClick={search2}>Find</button>
+     </div>
+     
+      {(typeof weather.main != "undefined") ? (
+      <div>
+        <div className="location-box">
+          <div className="location">{weather.name}, {weather.sys.country}</div>
+          <div className="date">{dateBuilder(new Date())}</div>
+        </div>
+        <div className="weather-box">
+          <div className="temp">
+            {Math.round(weather.main.temp)}°c
+          </div>
+          <div className="weather">{weather.weather[0].main}</div>
+        </div>
+      </div>
+      ) : ('')}  
+    </main>
+  </div>
+  
+);
 }
 
 export default App;
